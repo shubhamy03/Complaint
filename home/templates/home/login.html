@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form method="POST" action="." >
+    {% csrf_token %}
+    <H1>--- LOGIN ---</H1>
+    <table>
+        <tr>
+            <td>USER - ID :  </td>
+            <td><input type="text"  placeholder="  -- " name="username" /><br></td>
+        </tr>
+         <tr>
+            <td>Password :  </td>
+            <td><input type="text"  placeholder="  -- " name="password" /><br></td>
+        </tr>
+        <tr>
+            <td>
+                USER TYPE :
+            </td>
+            <td>
+            <select name="user_type">
+                <option value="1">Student</option>
+                <option value="2">CareTaker</option>
+                <option value="3">Supervisor</option>
+            </select>
+            </td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Submit" />
+</form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<form method="POST" action="/compl_form/" >
+    {% csrf_token %}
+    <H1>--- FILL THE FORM ---</H1>
+    <table>
+        <tr>
+            <td>Location :</td>
+            <td>
+            <select name="location">
+                <option value="HALL 1">HALL 1</option>
+                <option value="HALL 3">HALL 3</option>
+                <option value="HALL 4">HALL 4</option>
+                <option value="CC">CC</option>
+                <option value="GARBAGE">GARBAGE</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Specific Location :</td>
+            <td><input type="text"  placeholder="  --  " name="specific_location" /><br></td>
+        </tr>
+        <tr>
+            <td>Details :</td>
+            <td><input type="text"  placeholder="  --  " name="details" /><br></td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Submit" />
+</form>
+<ul>
+
+</ul>
+
+</body>
+</html>

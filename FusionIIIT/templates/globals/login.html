@@ -29,20 +29,20 @@
             <form method="post"
                   class="ui form"
                   style="margin-top: 7.5%;
-                                    margin-bottom: 3.5%;" action="/check/">
+                                    margin-bottom: 3.5%;" action="/complaint/check/">
                 {% csrf_token %}
 
                 <div class="field">
                     <label>Email Id:</label>
                     <div class="ui input">
-                        <input placeholder="e-mail">
+                        <input placeholder="e-mail" name="username">
                     </div>
                 </div>
 
                 <div class="field">
                     <label for="{{ loginform.lf_UserPassword.id_for_label }}">Password:</label>
                     <div class="ui input">
-                        <input placeholder="Password" type="password">
+                        <input placeholder="Password" type="password" name="password">
                     </div>
                 </div>
 

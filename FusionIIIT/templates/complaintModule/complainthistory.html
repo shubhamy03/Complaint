@@ -45,6 +45,9 @@
                     <th class="one wide column">
                         Status
                     </th>
+                    <th class="three wide column">
+                        Worker Name
+                    </th>
                 </tr>
                 </thead>
 
@@ -56,7 +59,7 @@
                         <h4 class="ui image header">
                             <img src="{% static 'globals/img/zlatan.jpg' %}" class="ui mini circular image">
                             <div class="content">
-                                {{ a.complainer }}
+                                <a href="{{ a.id }}/"> {{ a.complainer }}</a>
                                 <div class="sub header">
 
                                 </div>
@@ -85,10 +88,19 @@
                     </td>
 
                     <td>
-                        {% if a.status == '0' %}
+                        {% if a.status == 0 %}
                              <i class="large orange warning icon"></i>
+                        {% elif a.status == 1 %}
                              <i class="large red x icon"></i>
+                        {% elif a.status == 2 %}
                              <i class="large green checkmark icon"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if a.worker_id == NULL %}
+                            NOT ASSIGN
+                        {% else %}
+                            {{ a.worker_id }}
                         {% endif %}
                     </td>
                 </tr>

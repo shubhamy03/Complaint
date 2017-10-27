@@ -53,7 +53,7 @@ class Workers(models.Model):
 class StudentComplain(models.Model):
     complainer = models.ForeignKey(ExtraInfo, on_delete=models.CASCADE)
     complaint_date = models.DateTimeField(default=timezone.now)
-    complaint_finish = models.DateTimeField
+    complaint_finish = models.DateField(blank=True, null=True)
     complaint_type = models.CharField(choices=Constants.COMPLAINT_TYPE,
                                       max_length=20, default='internet')
     location = models.CharField(max_length=20, choices=Constants.AREA)

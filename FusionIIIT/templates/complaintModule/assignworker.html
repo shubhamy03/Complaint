@@ -1,0 +1,187 @@
+{% extends 'globals/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form method="post" action=".">
+    {% csrf_token %}
+    complainer Name : {{ detail.complainer }} </br>
+    complaint_date : {{ detail.complaint_date }} </br>
+    complaint_finish :  <input type='date' id='date' name='complaint_finish' required>
+                        <script>$('#date').datepicker({ dateFormat: 'yyyy-m-dd' }).val();</script>
+    </br>
+    complaint_type : {{ detail.complaint_type }} </br>
+    location : {{ detail.location }} </br>
+    specific_location :{{ detail.specific_location }} </br>
+    details : {{ detail.details }} </br>
+    status : {{ detail.status }} </br>
+
+    Assign Worker :
+        {% if flag == 'no_worker' %}
+            <B>NO WORKER PRESENT AT THE PLACE</B>
+        {% else %}
+            <select name="assign_worker">
+                {% for i in worker %}
+                    <option value="{{ i.id }}">{{ i.name }}</option>
+                {% endfor %}
+
+            </select>
+            <input type="submit">
+        {% endif %}
+
+</form>
+
+
+
+</body>
+</html>
+
+
+{% load static %}
+
+
+{% block title %}
+    Complaint
+{% endblock %}
+
+
+{% block body %}
+    {% block navBar %}
+        {% include 'dashboard/navbar.html' %}
+    {% endblock %}
+
+    {% comment %}The grid starts here!{% endcomment %}
+    <div class="ui stackable doubling grid">
+
+        {% comment %}The left-margin segment!{% endcomment %}
+        <div class="column"></div>
+
+        {% comment %}
+            The left-rail segment starts here!
+        {% endcomment %}
+        <div class="three wide column">
+
+            {% comment %}The user image card starts here!{% endcomment %}
+            {% block usercard %}
+                {% include 'globals/usercard.html' %}
+            {% endblock %}
+            {% comment %}The user image card ends here!{% endcomment %}
+
+            <div class="ui divider"></div>
+
+            {% comment %}The Tab-Menu starts here!{% endcomment %}
+            <div class="ui huge fluid vertical pointing menu"
+                 style="max-width: 320px;">
+
+                <a class="active item" data-tab="first">
+                    Lodge a Complaint
+                    <i class="right floated chevron right icon"></i>
+                </a>
+
+                <a class="item" data-tab="second">
+                    Complaint History
+                    <i class="right floated chevron right icon"></i>
+                </a>
+
+                <a class="item" data-tab="third">
+                    Resolve Complaints
+                    <i class="right floated chevron right icon"></i>
+                </a>
+            </div>
+            {% comment %}The Tab-Menu ends here!{% endcomment %}
+
+        </div>
+        {% comment %}
+            The left-rail segment ends here!
+        {% endcomment %}
+
+
+        <form method="post" action=".">
+            {% csrf_token %}
+             complainer Name : {{ detail.complainer }} </br>
+             complaint_date : {{ detail.complaint_date }} </br>
+             complaint_finish :
+                        <input type="TEXT" name="complaint_finish" placeholder="YYYY-MM-DD" >
+                </br>
+
+             complaint_type : {{ detail.complaint_type }} </br>
+             location : {{ detail.location }} </br>
+             specific_location :{{ detail.specific_location }} </br>
+             details : {{ detail.details }} </br>
+             status : {{ detail.status }} </br>
+
+             Assign Worker :
+                 {% if flag == 'no_worker' %}
+                     <B>NO WORKER PRESENT AT THE PLACE</B>
+                {% else %}
+                     <select name="assign_worker">
+                {% for i in worker %}
+                    <option value="{{ i.id }}">{{ i.name }}</option>
+                {% endfor %}
+
+            </select>
+            <input type="submit">
+        {% endif %}
+
+        </form>
+
+        <div class="eight wide column">
+            {% comment %}The ... start here!{% endcomment %}
+            <div class="ui tab segment" data-tab="first">
+                {% block lodgecomplaint %}
+                    {%  include 'complaintModule/lodgecomplaint.html' %}
+                {%  endblock %}
+            </div>
+            {% comment %}The ... end here!{% endcomment %}
+
+            {% comment %}The ... starts here!{% endcomment %}
+            <div class="ui tab segment" data-tab="second">
+                {% block complainthistory %}
+                    {%  include 'complaintModule/complainthistory.html' %}
+                {%  endblock %}
+            </div>
+            {% comment %}The ... ends here!{% endcomment %}
+
+            {% comment %}The ... starts here!{% endcomment %}
+            <div class="ui tab segment" data-tab="third">
+                {% block resolvecomplaint %}
+                    {%  include 'complaintModule/resolvecomplaint.html' %}
+                {%  endblock %}
+            </div>
+            {% comment %}The ... ends here!{% endcomment %}
+
+        </div>
+
+        {% comment %}
+            The central-rail segment starts here!
+        {% endcomment %}
+
+        {% comment %}The central-rail segment ends here!{% endcomment %}
+
+        {% comment %}The right-rail segment starts here!{% endcomment %}
+        <div class="three wide column">
+            <div class="row">
+                {% comment %}
+                    TODO: the right rail!
+                {% endcomment %}
+            </div>
+        </div>
+        {% comment %}The right-rail segment ends here!{% endcomment %}
+
+        {% comment %}The right-margin segment!{% endcomment %}
+        <div class="column"></div>
+
+    </div>
+    {% comment %}The grid ends here!{% endcomment %}
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+    <script type="text/javascript" src="{% static 'globals/js/datepicker.js' %}"></script>
+    <script type="text/javascript" src="{% static 'globals/js/tablesort.js' %}"></script>
+{% endblock %}
